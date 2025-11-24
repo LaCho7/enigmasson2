@@ -44,10 +44,10 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>EnigmaCopilot - Machine Enigma</title>
+        <title>EnigMASSON - Machine Enigma</title>
       </Head>
 
-      <h1>MASSON LOUIS</h1>
+      <h1>Enigmasson par MASSON LOUIS</h1>
 
       <div className="mainContent">
         <div className="leftColumn">
