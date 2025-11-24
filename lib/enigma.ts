@@ -1,6 +1,6 @@
 export type RotorSpec = {
-  wiring: string; // 26-letter mapping A..Z
-  notch: string; // letter(s) that cause next rotor to step
+  wiring: string; // Câblage du rotor : correspondance A..Z
+  notch: string; // Lettre(s) déclenchant l'avance du rotor suivant
 };
 
 const A = (c: string) => c.charCodeAt(0) - 65;
@@ -14,7 +14,7 @@ function rotateString(s: string, n: number) {
 export class Rotor {
   wiring: string;
   notch: string;
-  position: number; // 0..25 representing ring setting offset
+  position: number; // Position actuelle du rotor (0..25)
 
   constructor(spec: RotorSpec, position = 0) {
     this.wiring = spec.wiring;
@@ -23,21 +23,24 @@ export class Rotor {
   }
 
   step() {
+    // Avancer le rotor d'une position
     this.position = (this.position + 1) % 26;
   }
 
   atNotch() {
+    // Vérifie si le rotor est à la position d'encliquetage
     return this.notch.split("").some(n => A(n) === this.position);
   }
 
   forward(c: number) {
-    // input 0..25
+    // Passage du signal dans le rotor (avant)
     const shifted = (c + this.position) % 26;
     const mapped = A(this.wiring[shifted]);
     return (mapped - this.position + 26) % 26;
   }
 
   backward(c: number) {
+    // Passage du signal dans le rotor (retour)
     const shifted = (c + this.position) % 26;
     const idx = this.wiring.indexOf(C(shifted));
     return (idx - this.position + 26) % 26;
@@ -47,7 +50,9 @@ export class Rotor {
 export class Plugboard {
   map: number[];
   constructor(pairs: Array<[string, string]>) {
+    // Initialiser la permutation comme identité
     this.map = Array.from({ length: 26 }, (_, i) => i);
+    // Appliquer les échanges de paires
     pairs.slice(0, 3).forEach(([a, b]) => {
       const ia = A(a.toUpperCase());
       const ib = A(b.toUpperCase());
@@ -56,6 +61,7 @@ export class Plugboard {
     });
   }
   swap(n: number) {
+    // Appliquer la permutation du tableau
     return this.map[n];
   }
 }
@@ -72,40 +78,42 @@ export class Enigma {
   }
 
   stepRotors() {
-    // Implement double-step mechanism
-    // If middle rotor is at notch, it and left rotor step (double-step)
+    // Mécanisme de double-step d'Enigma
     const right = this.rotors[2];
     const middle = this.rotors[1];
     const left = this.rotors[0];
 
-    // If middle at notch, step middle and left
+    // Si le rotor central est à l'encliquetage, avancer le central et le gauche
     if (middle.atNotch()) {
       middle.step();
       left.step();
     }
-    // If right at notch, step middle
+    // Si le rotor droit est à l'encliquetage, avancer le central
     if (right.atNotch()) {
       middle.step();
     }
-    // Always step rightmost
+    // Toujours avancer le rotor droit
     right.step();
   }
 
   encodeChar(ch: string) {
+    // Traitement d'un caractère unique
     if (!/[A-Z]/.test(ch)) return ch;
     this.stepRotors();
     let c = A(ch);
+    // Signal passe par le tableau de connexions
     c = this.plugboard.swap(c);
-    // forward through rotors right->left
+    // Passage dans les rotors (droite vers gauche)
     for (let i = this.rotors.length - 1; i >= 0; i--) {
       c = this.rotors[i].forward(c);
     }
-    // reflector
+    // Passage par le reflecteur
     c = A(this.reflector[c]);
-    // back through rotors left->right
+    // Retour par les rotors (gauche vers droite)
     for (let i = 0; i < this.rotors.length; i++) {
       c = this.rotors[i].backward(c);
     }
+    // Passage final par le tableau de connexions
     c = this.plugboard.swap(c);
     return C(c);
   }

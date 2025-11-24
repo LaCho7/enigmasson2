@@ -4,6 +4,7 @@ import Keyboard from '../components/Keyboard'
 import { Enigma, DEFAULT_ROTORS } from '../lib/enigma'
 
 export default function Home() {
+  // États pour les positions des rotors et les paramètres Enigma
   const [positions, setPositions] = useState([0, 0, 0])
   const [initialPositions, setInitialPositions] = useState([0, 0, 0])
   const [plugs, setPlugs] = useState([['A', 'B'], ['C', 'D'], ['E', 'F']])
@@ -12,6 +13,7 @@ export default function Home() {
   const [decrypted, setDecrypted] = useState('')
   const enigmaRef = useRef<Enigma | null>(null)
 
+  // Déchiffrement avec les positions initiales
   const handleDecrypt = () => {
     const pairs = plugs.filter(p => p[0] && p[1] && p[0] !== p[1]) as [string, string][]
     const decryptor = new Enigma(DEFAULT_ROTORS, initialPositions, pairs)
@@ -19,8 +21,10 @@ export default function Home() {
     setDecrypted(result)
   }
 
+  // Traitement d'une touche du clavier virtuel
   const onKey = (k: string) => {
     if (!enigmaRef.current) {
+      // Initialiser la machine Enigma au premier caractère
       const pairs = plugs.filter(p => p[0] && p[1] && p[0] !== p[1]) as [string, string][]
       enigmaRef.current = new Enigma(DEFAULT_ROTORS, positions, pairs)
       setInitialPositions([...positions])
@@ -33,6 +37,7 @@ export default function Home() {
   }
 
   const updatePlug = (idx: number, pos: number, val: string) => {
+    // Mettre à jour une paire de permutation du tableau de connexions
     setPlugs(prev => prev.map((p, i) => i===idx ? (pos===0? [val.toUpperCase().slice(0,1), p[1]]: [p[0], val.toUpperCase().slice(0,1)]): p))
   }
 
@@ -42,7 +47,7 @@ export default function Home() {
         <title>EnigmaCopilot - Machine Enigma</title>
       </Head>
 
-      <h1>MACHINE ENIGMA</h1>
+      <h1>MASSON LOUIS</h1>
 
       <div className="mainContent">
         <div className="leftColumn">
