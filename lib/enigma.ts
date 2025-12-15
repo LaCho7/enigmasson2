@@ -28,7 +28,7 @@ export class Rotor {
   }
 
   atNotch() {
-    // Vérifie si le rotor est à la position d'encliquetage
+    // Vérifie si le rotor est à la position de Notch
     return this.notch.split("").some(n => A(n) === this.position);
   }
 
@@ -83,12 +83,12 @@ export class Enigma {
     const middle = this.rotors[1];
     const left = this.rotors[0];
 
-    // Si le rotor central est à l'encliquetage, avancer le central et le gauche
+    // Si le rotor central est à Notch, avancer le central et le gauche
     if (middle.atNotch()) {
       middle.step();
       left.step();
     }
-    // Si le rotor droit est à l'encliquetage, avancer le central
+    // Si le rotor droit est à Notch, avancer le central
     if (right.atNotch()) {
       middle.step();
     }
