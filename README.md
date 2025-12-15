@@ -1,8 +1,4 @@
-# Machine Enigma - Implementation Numerique
-
-## Description
-
-Cette application est une implémentation numérique fidèle de la machine Enigma, célèbre machine de chiffrement utilisée lors de la Seconde Guerre mondiale. Le projet propose une interface interactive permettant de comprendre les principes fondamentaux du chiffrement par substitution polyalphabétique.
+# Machine Enigma - Implementation Numerique - MASSON Louis M2
 
 ## Fonctionnalités
 
@@ -15,10 +11,6 @@ Cette application est une implémentation numérique fidèle de la machine Enigm
 **Reflecteur** : Composant qui renvoie le signal au travers des rotors en sens inverse, assurant la propriété fondamentale d'Enigma : le chiffrement est réversible.
 
 **Clavier virtuel** : Interface permettant de saisir du texte lettre par lettre, chaque frappe déclenchant le mécanisme d'avance des rotors.
-
-### Proprietes Cryptographiques
-
-La machine Enigma possède une propriété unique : si l'on chiffre un texte chiffré avec les mêmes paramètres initiaux (positions des rotors et tableau de connexions identiques), on récupère le texte original. Cela rend l'algorithme intrinsèquement symétrique.
 
 ## Utilisation
 
@@ -37,12 +29,11 @@ La machine Enigma possède une propriété unique : si l'on chiffre un texte chi
 ### Instructions (Windows PowerShell)
 
 ```powershell
-cd "c:\Données\_2025_2026\enigmacopilot"
 npm install
 npm run dev
 ```
 
-L'application sera accessible à l'adresse http://localhost:3000
+L'application sera accessible à l'adresse https://enigmasson2.vercel.app/
 
 ## Architecture Technique
 
@@ -50,7 +41,7 @@ L'application sera accessible à l'adresse http://localhost:3000
 
 **Langage** : TypeScript
 
-**Style** : CSS personnalisé avec design responsive
+**Style** : CSS personnalisé avec design responsive (fait par IA)
 
 ### Structure des fichiers
 
