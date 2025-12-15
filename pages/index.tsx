@@ -137,15 +137,6 @@ export default function Home() {
             <p>4. Cliquez sur DECODER pour voir le message original</p>
           </div>
 
-          <div className="infoBox">
-            <h3>Propriete</h3>
-            <p>La machine Enigma a une propriete unique : <strong>chiffrer un message chiffre le dechiffre</strong>. C est pour cela que l algorithme est symetrique.</p>
-          </div>
-
-          <div className="infoBox">
-            <h3>Conseil</h3>
-            <p>Pour decoder un message, utilisez les memes parametres que le chiffrement. Les rotors doivent etre aux memes positions initiales !</p>
-          </div>
         </div>
       </div>
     </div>
