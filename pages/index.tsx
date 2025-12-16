@@ -47,7 +47,7 @@ export default function Home() {
         <title>EnigMASSON - Machine Enigma</title>
       </Head>
 
-      <h1>Enigmasson par MASSON LOUIS</h1>
+      <h1>Enigmasson par MASSON LOUIS et PENSO MAX</h1>
 
       <div className="mainContent">
         <div className="leftColumn">
