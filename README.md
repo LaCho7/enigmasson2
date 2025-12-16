@@ -1,4 +1,4 @@
-# Machine Enigma - Implementation Numerique - MASSON Louis M2
+# Machine Enigma - Implementation Numerique - MASSON Louis - PENSO Max M2
 
 ## Fonctionnalités
 
