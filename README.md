@@ -41,7 +41,7 @@ L'application sera accessible à l'adresse https://enigmasson2.vercel.app/
 
 **Langage** : TypeScript
 
-**Style** : CSS personnalisé avec design responsive (fait par IA)
+**Style** : CSS personnalisé avec design responsive
 
 ### Structure des fichiers
 
